@@ -1,5 +1,6 @@
 package com.server.shruti.streaming.datasource.dummy
 
+import com.server.shruti.streaming.repository.DummyRepositoryImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
