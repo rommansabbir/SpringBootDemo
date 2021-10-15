@@ -16,7 +16,7 @@ internal class DummyControllerTest {
 
     @Test
     fun `verify`() {
-        mockMVC.get("/api/dummy/success")
+        mockMVC.get("/api/dummy")
             .andDo { print() }
             .andExpect {
                 status {
@@ -28,5 +28,17 @@ internal class DummyControllerTest {
                 }
             }
 
+    }
+
+
+    @Test
+    fun `shouldReturnSingleUser`() {
+        val userId = 5
+        mockMVC.get("/api/dummy/${userId}")
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+            }
     }
 }
