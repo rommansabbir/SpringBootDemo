@@ -7,7 +7,7 @@ package com.server.shruti.streaming.base
  */
 object APIErrors {
     private const val GENERIC_ERROR_CODE = 9999
-    private const val GENERIC_ERROR_MESSAGE = "Something went wrong."
+    internal const val GENERIC_ERROR_MESSAGE = "Something went wrong."
     private const val DUMMY_ERROR_CODE = 1001
     private const val DUMMY_ERROR_MESSAGE = "This is just a dummy error message!!!"
 
@@ -18,6 +18,6 @@ object APIErrors {
 
     val getUserNotFoundException = APIException(USER_NOT_FOUND_CODE,USER_NOT_FOUND_MESSAGE)
 
-    fun mapTopAPIException(e : Exception) = APIException(GENERIC_ERROR_CODE, e.message ?: GENERIC_ERROR_MESSAGE )
+    fun mapTopAPIException(e : Exception, errorCode : Int = GENERIC_ERROR_CODE) = APIException(errorCode, e.message ?: GENERIC_ERROR_MESSAGE )
 }
 

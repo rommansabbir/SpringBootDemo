@@ -2,7 +2,7 @@ package com.server.shruti.streaming.base
 
 
 /**
- * This is representing API Response
+ * This class representing API Response
  *
  * Note: This response model should be used for any API response across the application
  */
