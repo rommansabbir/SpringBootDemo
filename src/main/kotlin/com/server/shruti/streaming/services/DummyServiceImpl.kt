@@ -16,6 +16,10 @@ class DummyServiceImpl constructor(private val repository: DummyRepository) : Du
         return repository.saveModel(model)
     }
 
+    override fun deleteModel(model: DummyModel): Boolean {
+        return repository.deleteModel(model)
+    }
+
     override fun generateLog(message: String): Boolean {
         println("Logger: $message")
         return true

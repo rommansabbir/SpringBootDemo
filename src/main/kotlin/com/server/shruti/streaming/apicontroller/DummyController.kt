@@ -34,5 +34,18 @@ class DummyController(private val service: DummyService) {
             HttpStatus.CREATED
         )
     }
+
+    @RequestMapping(method = [RequestMethod.DELETE], produces = ["application/json"], path = ["/delete/"])
+    fun deleteUser(@RequestBody model: DummyModel): ResponseEntity<APIResponse<*>> {
+        service.deleteModel(model)
+        return ResponseEntity(
+            APIResponse(
+                status = true,
+                message = "Object deletion success.",
+                data = null
+            ),
+            HttpStatus.OK
+        )
+    }
 }
 

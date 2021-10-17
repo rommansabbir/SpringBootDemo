@@ -21,4 +21,9 @@ class DummyRepositoryImpl : DummyRepository {
         repository.save(model)
         return true
     }
+
+    override fun deleteModel(model: DummyModel): Boolean {
+        repository.delete(model)
+        return true
+    }
 }
