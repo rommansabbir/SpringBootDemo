@@ -1,3 +1,8 @@
 package com.server.shruti.streaming.datasource
 
-data class DummyModel(val userId : Int, val username : String)
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+
+@Document("Dummy")
+data class DummyModel(val userId: Int, val username: String){
+}
