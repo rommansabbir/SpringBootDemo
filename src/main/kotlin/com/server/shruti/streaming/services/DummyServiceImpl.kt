@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service
 @Service
 class DummyServiceImpl constructor(private val repository: DummyRepository) : DummyService {
     override fun getUserList(): Collection<DummyModel> {
+        saveModel(DummyModel(userId = 123, username = "rommansabbir"))
         return repository.getDummyUserList()
     }
 
-    override fun generateLog(message: String):Boolean {
+    override fun saveModel(model: DummyModel): Boolean {
+        return repository.saveModel(model)
+    }
+
+    override fun generateLog(message: String): Boolean {
         println("Logger: $message")
         return true
     }
