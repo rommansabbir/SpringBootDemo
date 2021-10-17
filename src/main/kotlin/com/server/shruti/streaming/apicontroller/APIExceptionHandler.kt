@@ -3,6 +3,7 @@ package com.server.shruti.streaming.apicontroller
 import com.server.shruti.streaming.base.APIErrors
 import com.server.shruti.streaming.base.APIException
 import com.server.shruti.streaming.base.APIResponse
+import com.server.shruti.streaming.repository.NoDummyModelFoundException
 import org.springframework.beans.ConversionNotSupportedException
 import org.springframework.beans.TypeMismatchException
 import org.springframework.boot.context.properties.bind.BindException
@@ -55,6 +56,7 @@ class APIExceptionHandler {
             put(MissingServletRequestPartException::class.java, HttpStatus.BAD_REQUEST)
             put(BindException::class.java, HttpStatus.BAD_REQUEST)
             put(AsyncRequestTimeoutException::class.java, HttpStatus.SERVICE_UNAVAILABLE)
+            put(NoDummyModelFoundException::class.java, HttpStatus.NOT_FOUND)
         }
     }
 
