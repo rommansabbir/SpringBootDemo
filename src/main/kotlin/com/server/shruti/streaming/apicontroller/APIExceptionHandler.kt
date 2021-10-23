@@ -18,9 +18,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingPathVariableException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.ServletRequestBindingException
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.springframework.web.multipart.support.MissingServletRequestPartException
@@ -28,7 +28,7 @@ import org.springframework.web.server.MethodNotAllowedException
 import org.springframework.web.servlet.NoHandlerFoundException
 
 
-@ControllerAdvice
+@RestControllerAdvice
 class APIExceptionHandler {
     companion object {
         /**
@@ -60,6 +60,19 @@ class APIExceptionHandler {
         }
     }
 
+    @ExceptionHandler(NoHandlerFoundException::class)
+    @ResponseBody
+    fun handle404Request(exception: Throwable): ResponseEntity<APIResponse<*>> {
+        return manageException(exception)
+    }
+
+
+    @ExceptionHandler(Throwable::class)
+    @ResponseBody
+    fun handleException(exception: Throwable): ResponseEntity<APIResponse<*>> {
+        return manageException(exception)
+    }
+
     /**
      * Handle API exception here.
      * Initialize the [APIResponse] object with error status & message.
@@ -72,9 +85,7 @@ class APIExceptionHandler {
      *
      * @return [ResponseEntity]
      */
-    @ExceptionHandler(Throwable::class)
-    @ResponseBody
-    fun handleException(exception: Throwable): ResponseEntity<APIResponse<*>> {
+    private fun manageException(exception: Throwable): ResponseEntity<APIResponse<*>> {
         val response = APIResponse<Any>(status = false, message = "Error", data = null)
         return try {
             var status = exceptionListHolder[exception.javaClass]
